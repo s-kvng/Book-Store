@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  return res.status(200).send("Welcome to the MERN Tutorail");
+  return res.status(200).send("Welcome to the book store");
 });
 
 app.post("/books", async (req, res) => {
