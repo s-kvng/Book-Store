@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 
 const { PORT } = require("./config");
 const mongoose = require("./db");
@@ -8,6 +9,9 @@ const app = express();
 
 //middleware for parsing json body
 app.use(express.json());
+
+//
+app.use(cors);
 
 app.get("/", (req, res) => {
   return res.status(200).send("Welcome to the book store");
