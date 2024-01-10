@@ -10,8 +10,16 @@ const app = express();
 //middleware for parsing json body
 app.use(express.json());
 
-//
-app.use(cors);
+//Middleware for handling cors policy
+//option 1: Allow all origins with the default (*)
+app.use(cors());
+
+//option 2: Allow custom origin
+app.use({
+  origin: "http//localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+});
 
 app.get("/", (req, res) => {
   return res.status(200).send("Welcome to the book store");
