@@ -1,7 +1,7 @@
 const { Book } = require("../models/bookModel");
 
 //get all books from the Database
-const getBooks = async () => {
+const getBooks = async (req, res) => {
   try {
     const books = await Book.find({});
     return res
@@ -35,8 +35,7 @@ const updateBook = async (req, res) => {
     }
 
     const { id } = req.params;
-    const result = Book.findByIdAndUpdate(id, req.body);
-
+    const result = await Book.findByIdAndUpdate(id, req.body);
     if (!result) {
       return res
         .status(404)
@@ -86,7 +85,7 @@ const deleteBook = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const result = Book.findByIdAndDelete(id);
+    const result = await Book.findByIdAndDelete(id);
 
     if (!result) {
       return res

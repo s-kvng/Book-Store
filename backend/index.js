@@ -12,14 +12,16 @@ app.use(express.json());
 
 //Middleware for handling cors policy
 //option 1: Allow all origins with the default (*)
-app.use(cors());
+// app.use(cors());
 
 //option 2: Allow custom origin
-app.use({
-  origin: "http//localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-});
+app.use(
+  cors({
+    origin: "http//localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.get("/", (req, res) => {
   return res.status(200).send("Welcome to the book store");
