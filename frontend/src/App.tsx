@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { Routes, Route } from 'react-router-dom'
+
 import './App.css'
+import Home from './pages/Home'
+import CreateBook from './pages/CreateBook'
+import UpdateBook from './pages/UpdateBook'
+import DeleteBook from './pages/DeleteBook'
+import ShowBook from './pages/ShowBook'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-    <>
-     <h1 className=' bg-red-500'>Hello World</h1>
-     <button>name</button>
-    </>
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='/books/create' element={<CreateBook/>}/>
+      <Route path='/books/details/:id' element={<ShowBook/>}/>
+      <Route path='/books/edit/:id' element={<UpdateBook />}/>
+      <Route path='/books/delete/:id' element={<DeleteBook/>}/>
+      
+    </Routes>
   )
 }
 
