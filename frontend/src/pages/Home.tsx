@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(()=>{
 
     setIsLoading(true)
-    axios.get('')
+    axios.get('http//:localhost:5172')
     .then((res)=>{
       console.log(res.data)
     })
