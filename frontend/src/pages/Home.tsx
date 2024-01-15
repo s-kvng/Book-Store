@@ -16,7 +16,7 @@ const Home = () => {
     .then((res)=>{
       console.log(res.data)
       setBooks([{}, {}])
-      setIsLoading(false) 
+      
     })
     .catch((err)=>{
       console.log(err.message)
@@ -35,7 +35,10 @@ const Home = () => {
         </div>
       </div>
 
-      {isLoading ? <Spinner/> : (
+      {isLoading ? 
+      <div className=" flex justify-center items-center pt-16">
+        <Spinner/>
+      </div> : (
         <table className=" w-full border-separate border-spacing-2">
           <thead>
             <tr>
