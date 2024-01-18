@@ -39,7 +39,7 @@ const Home = () => {
       <div className="flex justify-between items-center my-5">
         <h1 className=" font-bold text-3xl">Books List</h1>
         <div className="">
-        <Button className=" bg-sky-600 hover:bg-sky-300 text-xl" name="Table"/>
+        <Button types="button" className=" bg-sky-600 hover:bg-sky-300 text-xl" name="Table"/>
         </div>
       </div>
       <h1 className=" mb-3">No of Books: {count}</h1>
