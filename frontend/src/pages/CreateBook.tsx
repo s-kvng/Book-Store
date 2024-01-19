@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
 import Button from "../components/Button"
@@ -7,10 +7,17 @@ import axios from "axios"
 
 const CreateBook = () => {
 const navigate = useNavigate()
+const {id} = useParams()
   const [title,setTitle] = useState<string>("")
   const [author , setAuthor ] = useState<string>("")
   const [publishYear ,setPublishYear] = useState<string>("")
   const [ isLoading , setIsLoading] = useState<boolean>(false)
+
+
+  useEffect(()=>{
+
+
+  }, [])
 
   const handleSubmit = (e: React.FormEvent): void =>{
     e.preventDefault()
@@ -31,7 +38,7 @@ const navigate = useNavigate()
       alert("New book was not added")
       setIsLoading(false)
     })
-    console.log("Eat")
+   
   }
 
   
