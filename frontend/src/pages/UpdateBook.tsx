@@ -35,13 +35,13 @@ const UpdateBook = () => {
       publishYear
     }
 
-    axios.post("http://localhost:5555/books/create", data)
+    axios.put(`http://localhost:5555/books/${id}`, data)
     .then(()=>{
       navigate("/")
       setIsLoading(false)
     })
     .catch(()=>{
-      alert("New book was not added")
+      alert("Book not updated")
       setIsLoading(false)
     })
 
