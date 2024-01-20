@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
 import Button from "../components/Button"
@@ -7,7 +7,7 @@ import axios from "axios"
 
 const CreateBook = () => {
 const navigate = useNavigate()
-const {id} = useParams()
+
   const [title,setTitle] = useState<string>("")
   const [author , setAuthor ] = useState<string>("")
   const [publishYear ,setPublishYear] = useState<string>("")
@@ -29,7 +29,7 @@ const {id} = useParams()
       publishYear
     }
 
-    axios.post("http://localhost:5555/books/create", data)
+    axios.post("http://localhost:5555/books/", data)
     .then(()=>{
       navigate("/")
       setIsLoading(false)
@@ -78,7 +78,7 @@ const {id} = useParams()
             </div>
             <div className="my-2 flex flex-col">
               <label htmlFor="publishYear" className=" text-lg font-semibold">Publish Year</label>
-              <input type="date"
+              <input type="number"
               name="publishYear"
               className=" py-2 px-3 mt-1 border border-gray-400 rounded-lg " 
               value={publishYear} 

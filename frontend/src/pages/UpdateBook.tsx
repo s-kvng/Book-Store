@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { useNavigate,  useParams } from "react-router-dom"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
 import Button from "../components/Button"
@@ -8,10 +8,22 @@ import axios from "axios"
 
 const UpdateBook = () => {
   const navigate = useNavigate()
+  const {id} = useParams()
   const [title,setTitle] = useState<string>("")
   const [author , setAuthor ] = useState<string>("")
   const [publishYear ,setPublishYear] = useState<string>("")
   const [ isLoading , setIsLoading] = useState<boolean>(false)
+
+  useEffect(()=>{
+    axios.get(`http://localhost:5555/books/${id}`)
+    .then((res)=>{
+      const {title , author , publishYear} = res.data.data
+      console.log(title , author , publishYear)
+      setAuthor(author)
+      setTitle(title)
+      setPublishYear(publishYear)
+    })
+  },[])
 
   const handleSubmit = (e: React.FormEvent): void =>{
     e.preventDefault()
@@ -72,7 +84,7 @@ const UpdateBook = () => {
             </div>
             <div className="my-2 flex flex-col">
               <label htmlFor="publishYear" className=" text-lg font-semibold">Publish Year</label>
-              <input type="date"
+              <input type="number"
               name="publishYear"
               className=" py-2 px-3 mt-1 border border-gray-400 rounded-lg " 
               value={publishYear} 

@@ -6,7 +6,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import Button from "../components/Button"
+
 import Spinner from "../components/Spinner"
 import { Books } from "../models/Book"
 
@@ -39,7 +39,7 @@ const Home = () => {
       <div className="flex justify-between items-center my-5">
         <h1 className=" font-bold text-3xl">Books List</h1>
         <div className="">
-        <Button types="button" className=" bg-sky-600 hover:bg-sky-300 text-xl" name="Table"/>
+        <Link to={"http://localhost:5173/books/create"} className=" bg-sky-600 hover:bg-sky-300 text-xl py-2 px-3 rounded-lg">Add Book</Link>
         </div>
       </div>
       <h1 className=" mb-3">No of Books: {count}</h1>
