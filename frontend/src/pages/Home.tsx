@@ -1,20 +1,20 @@
 import axios from "axios"
-import { AiOutlineEdit} from "react-icons/ai"
-import { BsInfoCircle } from "react-icons/bs"
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md"
-
+import { MdOutlineAddBox,  } from "react-icons/md"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import Button from "../components/Button"
+
 import Spinner from "../components/Spinner"
 import { Books } from "../models/Book"
+import Button from "../components/Button"
+import ShowTable from "../components/ShowTable"
 
 
 const Home = () => {
   const [books, setBooks] = useState<Books[]>([])
   const [isLoading , setIsLoading] = useState<boolean>(false)
   const [count , setCount ] = useState<number>(0)
+  const [ showTable , setShowTable ] = useState<string>("table")
 
   useEffect(()=>{
 
@@ -36,10 +36,14 @@ const Home = () => {
 
   return (
     <div className="  p-5">
-      <div className="flex justify-between items-center my-5">
+      <div className=" flex justify-center items-center gap-x-5">
+        <Button onClick={()=> setShowTable('table')} types='button' name="Table" className=" bg-violet-600 hover:bg-violet-500"/>
+        <Button types='button' name="Card" className=" bg-violet-600 hover:bg-violet-500"/>
+      </div>
+      <div className="flex justify-between items-center my-5 ">
         <h1 className=" font-bold text-3xl">Books List</h1>
-        <div className="">
-        <Button className=" bg-sky-600 hover:bg-sky-300 text-xl" name="Table"/>
+        <div className="flex justify-center items-center">
+        <Link to={"http://localhost:5173/books/create"} className=""><MdOutlineAddBox size={30} color="blue" /></Link>
         </div>
       </div>
       <h1 className=" mb-3">No of Books: {count}</h1>
@@ -48,42 +52,7 @@ const Home = () => {
       <div className=" flex justify-center items-center pt-16">
         <Spinner/>
       </div> : (
-        <>
-          <table className=" w-full border-separate border-spacing-2">
-          <thead>
-            <tr>
-              <th className=" border border-slate-600 rounded-md">No</th>
-              <th className=" border border-slate-600 rounded-md">Title</th>
-              <th className=" border border-slate-600 rounded-md max-md:hidden">Author</th>
-              <th className=" border border-slate-600 rounded-md max-md:hidden">Publish Year</th>
-              <th className=" border border-slate-600 rounded-md ">Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book)=>(
-              <tr>
-                <td className="border border-slate-700 rounded-md text-center">{book._id}</td>
-                <td className="border border-slate-700 rounded-md text-center">{book.title}</td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">{book.author}</td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">{book.publishYear}</td>
-                <td className="border border-slate-700 rounded-md">
-                  <div className=" flex justify-center gap-x-3">
-                  <Link to={`books/details/${book._id}`}>
-                    <BsInfoCircle color="blue"/>
-                  </Link>
-                  <Link to={`books/edit/${book._id}`}>
-                  <AiOutlineEdit color="orange"/>
-                  </Link>
-                  <Link to={`books/delete/${book._id}`}>
-                    <MdOutlineDelete color="red"/>
-                  </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </>
+      <ShowTable books={books} />
       ) }
     </div>
   )
